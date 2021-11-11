@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Getting started with Blockly</title>
+</head>
+
+<body>
+  <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+  <xml id="toolbox" style="display: none">
+    <block type="controls_repeat"></block>
+    <block type="text"></block>
+    <block type="text_print"></block>
+    <block type="go_left"></block>
+    <block type="go_right"></block>
+    <block type="go_up"></block>
+    <block type="go_down"></block>
+    <block type="sample"></block>
+    <block type="test"></block>
+  </xml>
+  <button id="showCode">JavaScriptを表示する</button>
+  <script>
+    var demoWorkspace = Blockly.inject('blocklyDiv',
+        {media: 'blockly/media/',
+        toolbox: document.getElementById('toolbox')});
+
+    function genJavaScript() {
+      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+      var code = Blockly.JavaScript.WorkspaceToCode(demoWorkspace);
+      //document.getElementById('code_output').value=code;
+      eval(code);
+    }
+
+    function runJavaScript(event) {
+      Blockly.JavaScript.addReservedWords('code');
+      var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+      try {
+        eval(code);
+      } catch (e) {
+        alert(e);
+      }
+    }
+  </script>
+  <p><button onclick="runJavaScript(event)">実行</button></p>
+  <pre id='jsCode'></pre>
+  <!--<script src="lib/google-blockly/blockly_compressed.js"></script>
+  <script src="lib/google-blockly/blocks_compressed.js"></script>
+  <script src="lib/google-blockly/javascript_compressed.js"></script>
+  <script src="lib/google-blockly/msg/js/ja.js"></script>-->
+  <script src="{% static 'js/google-blockly/blockly_compressed.js' %}"></script>
+  <script src="{% static 'js/google-blockly/blocks_compressed.js' %}"></script>
+  <script src="{% static 'js/google-blockly/javascript_compressed.js' %}"></script>
+  <script src="{% static 'js/google-blockly/msg/js/ja.js' %}"></script>
+
+  <!--<script src="lib/js-interpreter/acorn_interpreter.js"></script>-->
+  <!--<script src="myblock.js"></script>
+  <script src="sample.js"></script>
+  <script src="test.js"></script>
+  <script src="index.js"></script>-->
+  <script src="{% static 'js/myblock.js' %}"></script>
+  <script src="{% static 'js/sample.js' %}"></script>
+  <script src="{% static 'js/test.js' %}"></script>
+  <script src="{% static 'js/index.js' %}"></script>
+</body>
+
+</html>

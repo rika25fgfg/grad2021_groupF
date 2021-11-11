@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>信号機</title>
+    <script src="lib/js-interpreter/acorn_interpreter.js"></script>
+    <script src="lib/google-blockly/blockly_compressed.js"></script>
+    <script src="lib/google-blockly/blocks_compressed.js"></script>
+    <script src="lib/google-blockly/javascript_compressed.js"></script>
+    <script src="lib/google-blockly/msg/js/ja.js"></script>
+    <script src="stoplightblocks.js"></script>
+    <style type="text/css">
+        body {
+            background-color: #fff;
+            font-family: sans-serif;
+        }
+        h1 {
+            font-weight: normal;
+            font-size: 140%;
+        }
+        #light {
+            position: absolute;
+            left: 650px;
+            top: 100px;
+        }
+        .circle {
+            position: absolute;
+            height: 59px;
+            width: 59px;
+            border-radius:50%;
+            background-color: white;
+            border: solid 1px black;
+        }
+    </style>
+</head>
+<body>
+    <!-- button on run code -->
+    <p>
+        <button id="stepButton" onclick="stepCode()">Step Code</button>
+    </p>
+    <!-- blockly workspace -->
+    <div id="blocklyDiv" style="height:480px;width:600px;"></div>
+    <xml id="toolbox" style="display:none;">
+        <category name="logic">
+            <block type="stoplightswitch"></block>
+            <block type="math_number"></block>
+        </category>
+    </xml>
+    <!-- added to the page -->
+    <!--<img id="light" src="stoplight.png" />-->
+    <div id="light0" class="circle" style="left:770px;top:132px;"></div>
+    <div id="light1" class="circle" style="left:770px;top:209px;"></div>
+    <div id="light2" class="circle" style="left:770px;top:287px;"></div>
+<script>
+    //set options
+    var options = {
+        toolbox: toolbox,
+        collapse: true,
+        comments: true,
+        disable: true,
+        maxBlocks: Infinity,
+        trashcan: true,
+        horizontalLayout: false,
+        toolboxPosition: 'start',
+        css: true,
+        rtl: false,
+        scrollbars: true,
+        sounds: true,
+        oneBasedIndex: true,
+        grid: {
+            spacing: 20,
+            length: 1,
+            colour: '#888',
+            snap: true
+        }
+    }
+    //put the toolbox in the workspace　
+    var workspace = Blockly.inject('blocklyDiv', options);
+    var stepButton = document.getElementById('stepButton');
+    var myInterpreter = null;
+    var highlightPause = false;
+    var code = '';
+    function highlightBlock(id) {
+        workspace.highlightBlock(id);
+        highlightPause = true;
+    }
+    function generateCodeAndLoadIntoInterpreter() {
+        // Generate JavaScript code and parse it.
+        Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
+        Blockly.JavaScript.addReservedWords('highlightBlock');
+        code = Blockly.JavaScript.workspaceToCode(workspace);
+    }
+    // Load the interpreter now, and upon future changes. 
+    generateCodeAndLoadIntoInterpreter();
+    workspace.addChangeListener(function(event) {
+        if (!(event instanceof Blockly.Events.Ui)) {
+            // Something changed. Parser needs to be reloaded.
+            generateCodeAndLoadIntoInterpreter();
+        }
+    });
+    function initApi(interpreter, scope) {
+        // Add an API function for highlighting blocks.
+        wrapper = function(id) {
+            id = id ? id.toString() : '';
+            return interpreter.createPrimitive(highlightBlock(id));
+        };
+        interpreter.setProperty(
+            scope,
+            'highlightBlock',
+            interpreter.createNativeFunction(wrapper)
+        );
+        // 信号機のライト点滅制御ためのAPI関数を追加
+        wrapper = function(lightNo, lightColor) {
+            lightNo = lightNo ? lightNo.toString() : '';
+            lightColor = lightColor ? lightColor.toString() : '';
+            return interpreter.createPrimitive(setLightColor(lightNo, lightColor));
+        };
+        interpreter.setProperty(
+            scope,
+            'setLightColor',
+            interpreter.createNativeFunction(wrapper)
+        )
+    }
+    // 信号機のライト点滅の制御関数
+    function setLightColor(lightNo, lightColor) {
+        document.getElementById("light" + lightNo).style.backgroundColor= lightColor ;
+    }
+    function stepCode() {
+        if (!myInterpreter) {
+            // First statement of this code.
+            myInterpreter = new Interpreter(code, initApi);
+            // do the first statement
+            setTimeout(function() {
+              highlightPause = true;
+              stepCode();
+            }, 1);
+            return;
+        }
+        highlightPause = false;
+        try {
+            var ok = myInterpreter.step();
+            var node = myInterpreter.stateStack[myInterpreter.stateStack.length - 1].node;
+            console.log(node);
+        } finally {
+            if (!ok) {
+                document.getElementById('stepButton').disabled = 'disabled';
+            }
+        }
+    }
+</script>
+</body>
+</html>
