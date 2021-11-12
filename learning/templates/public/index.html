@@ -16,7 +16,6 @@
     <block type="go_right"></block>
     <block type="go_up"></block>
     <block type="go_down"></block>
-    <!-- <block type="sample"></block> -->
     <block type="test"></block>
   </xml>
   <button id="showCode">JavaScriptを表示する</button>
@@ -44,24 +43,17 @@
   </script>
   <p><button onclick="runJavaScript(event)">実行</button></p>
   <pre id='jsCode'></pre>
-  <!--<script src="lib/google-blockly/blockly_compressed.js"></script>
-  <script src="lib/google-blockly/blocks_compressed.js"></script>
-  <script src="lib/google-blockly/javascript_compressed.js"></script>
-  <script src="lib/google-blockly/msg/js/ja.js"></script>-->
+
   <script src="{% static 'js/google-blockly/blockly_compressed.js' %}"></script>
   <script src="{% static 'js/google-blockly/blocks_compressed.js' %}"></script>
   <script src="{% static 'js/google-blockly/javascript_compressed.js' %}"></script>
   <script src="{% static 'js/google-blockly/msg/js/ja.js' %}"></script>
 
   <!--<script src="lib/js-interpreter/acorn_interpreter.js"></script>-->
-  <!--<script src="myblock.js"></script>
-  <script src="sample.js"></script>
-  <script src="test.js"></script>
-  <script src="index.js"></script>-->
-  <script src="{% static 'js/myblock.js' %}"></script>
-  <script src="{% static 'js/function.js' %}"></script>
-  <script src="{% static 'js/test.js' %}"></script>
+  <script src="{% static 'js/mycode.js' %}"></script>
   <script src="{% static 'js/index.js' %}"></script>
+
+
 </body>
 
 </html>
