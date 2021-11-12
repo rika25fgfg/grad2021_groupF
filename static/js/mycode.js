@@ -76,7 +76,9 @@ Blockly.JavaScript['go_left'] = function(block) {
    
   Blockly.JavaScript['go_down'] = function(block) {
     var code = 'console.log("下に進む");\n';
-    //var statements = Blockly.JavaScript.statementToCode(block, 'NAME');
+    //var warn = '下に進む';
+　  //alert(warn);
+    var statements = Blockly.JavaScript.statementToCode(block, 'NAME');
     //var code = 'alert("");\n'
     return code;
   };
