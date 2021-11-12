@@ -45,6 +45,17 @@
         alert(e);
       }
     }
+    function showCode() {
+      // Generate Processing code and display it.
+      Blockly.Processing.INFINITE_LOOP_TRAP = null;
+      var code = Blockly.Processing.workspaceToCode(workspace);
+      alert(code);
+    }
+    function showXml() {
+      var xml = Blockly.Xml.workspaceToDom(workspace);
+      var code = Blockly.Xml.domToPrettyText(xml);
+      alert(code);
+    }
 //ここからサンプル
     /** ブロックを全消去 */
     function clearBlocks() {
