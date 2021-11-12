@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'learning.apps.LearningConfig',
+    'django_static_md5url',
 ]
 
 MIDDLEWARE = [
