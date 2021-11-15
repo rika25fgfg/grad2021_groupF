@@ -2,5 +2,4 @@ Django==2.2.2
 django-allauth==0.45.0
 social-auth-app-django==5.0.0
 
-
 # https://startbootstrap.com/previews/resume
