@@ -8,7 +8,38 @@
 </head>
 
 <body>
-  <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+  <style>
+    .modalWindow {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      margin-right: -50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      background-color: white;
+      border-radius: 8px;
+      padding: 10px 20px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .modalFooter {
+      text-align: right;
+      /* cancel button at the right corner */
+    }
+
+    .modalWindow ul {
+      list-style: none;
+      /* no bullet */
+    }
+
+    .modalWindow a {
+      text-decoration: none;
+      /* no underline */
+      cursor: pointer;
+      /* pointer even for anchors without href */
+      color: #48f;
+    }
+  </style>
   <xml id="toolbox" style="display: none">
     <block type="controls_repeat"></block>
     <block type="text"></block>
@@ -20,14 +51,34 @@
     <!--<block type="sample"></block>-->
     <block type="test"></block>
   </xml>
+  <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
   <button id="showCode">JavaScriptを表示する</button>
+  <p id="buttonRow">
+    <button onclick="runJavaScript(event)">実行</button>
+    <button onclick="saveBlocks()" id="saveButton">保存</button>
+    <button onclick="restoreBlocks()" id="restoreButton">復元</button> &nbsp;&nbsp;
+    <!--<button onclick="clearBlocks()" id="clearButton">全消去</button>-->
+  </p>
+  <div id="restoreModal" class="modal" onclick="pressCancelRestoreBlocks(event)">
+    <div class="modalWindow" style="width: 480px">
+      <div class="modalHeader">
+        保存済プログラム
+      </div>
+      <ul id="restoreList">
+      </ul>
+      <div class="modalFooter">
+        <a onclick="cancelRestoreBlocks()">キャンセル</a>
+      </div>
+    </div>
+  </div>
   <script>
-    var xml = Blockly.Xml.workspaceToDom(workspace);
-    var myBlockXml = Blockly.Xml.domToText(xml);
-
     var demoWorkspace = Blockly.inject('blocklyDiv',
-        {media: 'blockly/media/',
-        toolbox: document.getElementById('toolbox')});
+      {
+        media: 'blockly/media/',
+        toolbox: document.getElementById('toolbox')
+      });
+    //Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
+    //workspace);
 
     function genJavaScript() {
       Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
@@ -45,8 +96,9 @@
         alert(e);
       }
     }
+
     function showCode() {
-      // Generate Processing code and display it.
+      //Generate Processing code and display it.
       Blockly.Processing.INFINITE_LOOP_TRAP = null;
       var code = Blockly.Processing.workspaceToCode(workspace);
       alert(code);
@@ -56,19 +108,19 @@
       var code = Blockly.Xml.domToPrettyText(xml);
       alert(code);
     }
-//ここからサンプル
+
     /** ブロックを全消去 */
-    function clearBlocks() {
-      if (window.confirm('プログラムを消去してよいですか?')) {
-        workspace.clear();
-        Blockly.Xml.domToWorkspace(document.getElementById('clearBlocks'),workspace);
-      }
-    }
+    //function clearBlocks() {
+    //  if (window.confirm('プログラムを消去してよいですか?')) {
+    //    workspace.clear();
+    //    Blockly.Xml.domToWorkspace(document.getElementById('clearBlocks'),workspace);
+    //  }
+    //}
 
     /** ローカルストレージに保存するときのキー接頭辞 */
     var savedBlockPrefix = 'bky.prc.saved.';
 
-    /** ブロックを保存 */
+    //* ブロックを保存 */
     function saveBlocks() {
       if ('localStorage' in window) {
         var name = null;
@@ -76,21 +128,22 @@
           name = window.prompt('プログラム名を入力してください');
           if (!name) { return; } // ignore if empty
           if (window.localStorage[savedBlockPrefix + name]) {
-            if (! window.confirm(name + ' は存在します。上書きしますか?')) {
+            if (!window.confirm(name + ' は存在します。上書きしますか?')) {
               name = null;
             }
           }
         }
         name = savedBlockPrefix + name;
         var xml = Blockly.Xml.workspaceToDom(workspace);
+        alert(Blockly.Xml.domToText(xml));
         window.localStorage.setItem(name, Blockly.Xml.domToText(xml));
       }
     }
-    /** ブロックを復元 */
+    //* ブロックを復元 */
     function restoreBlocks() {
       if ('localStorage' in window) {
         var modal = document.getElementById('restoreModal');
-        var list  = document.getElementById('restoreList');
+        var list = document.getElementById('restoreList');
         var items = [];
         for (var key in window.localStorage) {
           if (key.startsWith(savedBlockPrefix)) {
@@ -106,7 +159,7 @@
         var itemsHtml = '';
         for (var i = 0; i < items.length; i++) {
           itemsHtml += '<li><a onclick="restoreBlocksFrom(\'' +
-                       items[i] + '\')">' + items[i] + '</a></li>';
+            items[i] + '\')">' + items[i] + '</a></li>';
         }
         list.innerHTML = itemsHtml;
         modal.style.display = 'block';
@@ -155,7 +208,7 @@
       var ex = document.location.href.match(/\?ex=(\w+)$/);
       if (ex && window.XMLHttpRequest) {
         var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function() {
+        xmlHttp.onreadystatechange = function () {
           if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
             var xml = Blockly.Xml.textToDom(xmlHttp.responseText);
             workspace.clear();
@@ -167,31 +220,14 @@
         xmlHttp.send(null);
       }
     })();
-  
 
   </script>
-  <p><button onclick="runJavaScript(event)">実行</button>
-    <button onclick="saveBlocks()" id="saveButton">保存</button>
-    <button onclick="restoreBlocks()" id="restoreButton">復元</button>
-    <button onclick="clearBlocks()" id="clearButton">全消去</button>
-  </p>
   <pre id='jsCode'></pre>
-  <!--<script src="lib/google-blockly/blockly_compressed.js"></script>
-  <script src="lib/google-blockly/blocks_compressed.js"></script>
-  <script src="lib/google-blockly/javascript_compressed.js"></script>
-  <script src="lib/google-blockly/msg/js/ja.js"></script>-->
   <script src="{% md5url 'js/google-blockly/blockly_compressed.js' %}"></script>
   <script src="{% md5url 'js/google-blockly/blocks_compressed.js' %}"></script>
   <script src="{% md5url 'js/google-blockly/javascript_compressed.js' %}"></script>
   <script src="{% md5url 'js/google-blockly/processing_compressed.js' %}"></script>
   <script src="{% md5url 'js/google-blockly/msg/js/ja.js' %}"></script>
-
-  <!--<script src="lib/js-interpreter/acorn_interpreter.js"></script>-->
-  <!--<script src="myblock.js"></script>
-  <script src="sample.js"></script>
-  <script src="test.js"></script>
-  <script src="index.js"></script>-->
-
   <script src="{% md5url 'js/mycode.js' %}"></script>
   <script src="{% md5url 'js/index.js' %}"></script>
 </body>
