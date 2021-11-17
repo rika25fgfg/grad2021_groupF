@@ -57,11 +57,11 @@
     <span>
       <button onclick="runJavaScript(event)">実行</button>
       <button onclick="saveBlocks()" id="saveButton">保存</button>
-      <button onclick="restoreBlocks()" id="restoreButton">復元</button> &nbsp;&nbsp;
+      <button onclick="restoreBlocksFrom('test.txt')" id="restoreButton">復元</button> &nbsp;&nbsp;
       <!--<button onclick="clearBlocks()" id="clearButton">全消去</buton>-->
     </span>
   </p>
-  <div id="restoreModal" class="modal" onclick="pressCancelRestoreBlocks(event)">
+  <!-- <div id="restoreModal" class="modal" onclick="pressCancelRestoreBlocks(event)">
     <div class="modalWindow" style="width: 480px">
       <div class="modalHeader">
         保存済プログラム
@@ -78,7 +78,7 @@
         <a onclick="cancelRestoreBlocks()">キャンセル</a>
       </div>
     </div>
-  </div>
+  </div>-->
   <script>
     var demoWorkspace = Blockly.inject('blocklyDiv',
       {
@@ -126,7 +126,7 @@
     //}
 
     /** ローカルストレージに保存するときのキー接頭辞 */
-    var savedBlockPrefix = 'bky.prc.saved.';
+    var savedBlockPrefix = '/static/assets';
 
     //* ブロックを保存 */
     function saveBlocks() {
@@ -147,48 +147,75 @@
         const blob = new Blob([Blockly.Xml.domToText(xml)], { type: "text/plain" });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = 'test.txt';
+        link.download = savedBlockPrefix + 'test.txt';
         link.click();
         //window.localStorage.setItem(name, Blockly.Xml.domToText(xml));
       }
     }
     //* ブロックを復元 */
-    function restoreBlocks() {
-      if ('localStorage' in window) {
-        var modal = document.getElementById('restoreModal');
-        var list = document.getElementById('restoreList');
-        var items = [];
-        for (var key in window.localStorage) {
-          if (key.startsWith(savedBlockPrefix)) {
-            var keyBody = key.substr(savedBlockPrefix.length);
-            items.push(keyBody);
-          }
-        }
-        if (items.length == 0) {
-          window.alert('保存されているプログラムはありません');
-          return;
-        }
-        items.sort();
-        var itemsHtml = '';
-        for (var i = 0; i < items.length; i++) {
-          itemsHtml += '<li><a onclick="restoreBlocksFrom(\'' + items[i] + '\')">' + items[i] + '</a></li>';
-        }
-        list.innerHTML = itemsHtml;
-        modal.style.display = 'block';
-      }
-    }
+    //function restoreBlocks() {
+    //  if ('localStorage' in window) {
+    //    var modal = document.getElementById('restoreModal');
+    //    var list = document.getElementById('restoreList');
+    //    var items = [];
+    //    for (var key in window.localStorage) {
+    //      if (key.startsWith(savedBlockPrefix)) {
+    //        var keyBody = key.substr(savedBlockPrefix.length);
+    //        items.push(keyBody);
+    //      }
+    //    }
+    //    if (items.length == 0) {
+    //      window.alert('保存されているプログラムはありません');
+    //      return;
+    //   }
+    //   items.sort();
+    //    var itemsHtml = '';
+    //    for (var i = 0; i < items.length; i++) {
+    //      itemsHtml += '<li><a onclick="restoreBlocksFrom(\'' + items[i] + '\')">' + items[i] + '</a></li>';
+    //    }
+    //    list.innerHTML = itemsHtml;
+    //    modal.style.display = 'block';
+    //  }
+    //}
+
+    //復元
     function restoreBlocksFrom(name) {
-      var modal = document.getElementById('restoreModal');
-      modal.style.display = 'none';
-      if (!name) { return; } // ignore if empty
-      if (window.localStorage[savedBlockPrefix + name]) {
-        name = savedBlockPrefix + name;
-        var xml = Blockly.Xml.textToDom(window.localStorage[name]);
-        workspace.clear();
-        Blockly.Xml.domToWorkspace(xml, workspace);
-      } else {
-        window.alert('Error: ' + name + ' がありません');
-      }
+      //const showOpenFileDialog = () => {
+      //  return new Promise(resolve => {
+      //    const input = document.createElement('input');
+      //    input.type = 'file';
+      //    input.accept = 'text/plain';
+      //    input.onchange = event => { resolve(event.target.files[0]); };
+      //    input.click();
+      //  });
+      //};
+
+      //const readAsText = file => {
+      //  return new Promise(resolve => {
+      //    const reader = new FileReader();
+      //    reader.readAsText(file);
+      //    reader.onload = () => { resolve(reader.result); };
+      //  });
+      //};
+
+      //(async () => {
+      //const file = await showOpenFileDialog();
+      //const content = await readAsText(file);
+      // 内容表示
+      var xml = Blockly.Xml.textToDom(savedBlockPrefix + 'test.txt');//window.localStorage[name]);
+      alert(xml);
+      workspace.clear();
+      Blockly.Xml.domToWorkspace(xml, workspace);
+      //alert(xml);
+      //})();
+      //var modal = document.getElementById('restoreModal');
+      //modal.style.display = 'none';
+      //if (!name) { return; } // ignore if empty
+      //if (window.localStorage[savedBlockPrefix + name]) {
+      //name = savedBlockPrefix + name;
+      //} else {
+      //  window.alert('Error: ' + name + ' がありません');
+      //}
     }
     function cancelRestoreBlocks() {
       var modal = document.getElementById('restoreModal');
