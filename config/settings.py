@@ -40,6 +40,13 @@ INSTALLED_APPS = [
 
     'learning.apps.LearningConfig',
     'django_static_md5url',
+
+    'accounts.apps.AccountsConfig',
+
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +132,24 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+SITE_ID = 1
+
+AUTHENTION_BACKENDS = (
+    'allauth.account.auth_backends.AuthenticationBackend',
+    #一般ユーザー用(メールアドレス認証)
+    'django.contrib.auth.backends.ModelBackends',
+    #管理サイト用(ユーザー名認証)
+)
+
+#メールアドレス認証に変更する設定
+ACCOUNT_AUTHENICATION_METHOD = 'email'
+ACCOUNT_USERNAME_REQUIRED = False
+
+#サインアップにメールアドレス確認をはさむように設定
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_REQUIRED = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
