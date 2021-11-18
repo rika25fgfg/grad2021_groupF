@@ -8,38 +8,6 @@
 </head>
 
 <body>
-  <style>
-    .modalWindow {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      margin-right: -50%;
-      -webkit-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-      background-color: white;
-      border-radius: 8px;
-      padding: 10px 20px;
-      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .modalFooter {
-      text-align: right;
-      /* cancel button at the right corner */
-    }
-
-    .modalWindow ul {
-      list-style: none;
-      /* no bullet */
-    }
-
-    .modalWindow a {
-      text-decoration: none;
-      /* no underline */
-      cursor: pointer;
-      /* pointer even for anchors without href */
-      color: #48f;
-    }
-  </style>
   <xml id="toolbox" style="display: none">
     <block type="controls_repeat"></block>
     <block type="text"></block>
@@ -105,52 +73,31 @@
 
     //* ブロックを保存 */
     function saveBlocks() {
-      if ('localStorage' in window) {
-        var name = null;
-        while (!name) {
-          name = window.prompt('プログラム名を入力してください');
-          if (!name) { return; } // ignore if empty
-          if (window.localStorage[savedBlockPrefix + name]) {
-            if (!window.confirm(name + ' は存在します。上書きしますか?')) {
-              name = null;
-            }
-          }
-        }
-        name = savedBlockPrefix + name;
-        var xml = Blockly.Xml.workspaceToDom(workspace);
-        alert(Blockly.Xml.domToText(xml));
-        const blob = new Blob([Blockly.Xml.domToText(xml)], { type: "text/plain" });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = savedBlockPrefix + 'test.txt';
-        link.click();
-        //window.localStorage.setItem(name, Blockly.Xml.domToText(xml));
-      }
+      //if ('localStorage' in window) {
+      //  var name = null;
+      //  while (!name) {
+      //    name = window.prompt('プログラム名を入力してください');
+      //    if (!name) { return; } // ignore if empty
+      //    if (window.localStorage[savedBlockPrefix + name]) {
+      //      if (!window.confirm(name + ' は存在します。上書きしますか?')) {
+      //        name = null;
+      //      }
+      //    }
+      //  }
+      name = savedBlockPrefix + name;
+      var xml = Blockly.Xml.workspaceToDom(workspace);
+      alert(Blockly.Xml.domToText(xml));
+      const blob = new Blob([Blockly.Xml.domToText(xml)], { type: "text/plain" });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = savedBlockPrefix + 'test.txt';
+      link.click();
+      //window.localStorage.setItem(name, Blockly.Xml.domToText(xml));
+      //}
     }
 
     //復元
     function restoreBlocksFrom(name) {
-      //const showOpenFileDialog = () => {
-      //  return new Promise(resolve => {
-      //    const input = document.createElement('input');
-      //    input.type = 'file';
-      //    input.accept = '.txt, text/plain';
-      //    input.onchange = event => { resolve(event.target.files[0]); };
-      //    input.click();
-      //  });
-      //};
-
-      //const readAsText = file => {
-      //  return new Promise(resolve => {
-      //    const reader = new FileReader();
-      //    reader.readAsText(file);
-      //    reader.onload = () => { resolve(reader.result); };
-      //  });
-      //};
-
-      //(async () => {
-      //  const file = await showOpenFileDialog();
-      //  const content = await readAsText(file);
       const file = document.getElementById('file').files[0];
       //alert(file.size);
       const reader = new FileReader();
@@ -180,38 +127,6 @@
         cancelRestoreBlocks();
       }
     }
-
-    (function () {
-      if (document.location.href.endsWith('?debugbuttons')) {
-        var row = document.getElementById('buttonRow');
-        var e = document.createElement('span');
-        e.setAttribute('style', 'margin-left: 80px; font-size: smaller;');
-        e.innerText = 'For debugging: ';
-        row.appendChild(e);
-        e = document.createElement('button');
-        e.setAttribute('onclick', 'showCode()');
-        e.innerText = 'Show Processing';
-        row.appendChild(e);
-        e = document.createElement('button');
-        e.setAttribute('onclick', 'showXml()');
-        e.innerText = 'Show XML';
-        row.appendChild(e);
-      }
-      var ex = document.location.href.match(/\?ex=(\w+)$/);
-      if (ex && window.XMLHttpRequest) {
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function () {
-          if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-            var xml = Blockly.Xml.textToDom(xmlHttp.responseText);
-            workspace.clear();
-            Blockly.Xml.domToWorkspace(xml, workspace);
-          }
-        };
-        var fname = 'example/' + ex[1] + '.xml';
-        xmlHttp.open("GET", fname, true);
-        xmlHttp.send(null);
-      }
-    })();
 
   </script>
   <pre id='jsCode'></pre>

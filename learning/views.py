@@ -8,3 +8,5 @@ class IndexView(generic.TemplateView):
 class BlockView(generic.TemplateView):
     template_name = "public/index.html"
 
+class EnzanView(generic.TemplateView):
+    template_name = "public/addition.html"
