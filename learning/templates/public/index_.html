@@ -7,16 +7,12 @@
 <!-- <script src="lib/google-blockly/blocks_compressed.js"></script> -->
 <!-- <script src="lib/google-blockly/javascript_compressed.js"></script> -->
 <!-- <script src="lib/google-blockly/msg/js/ja.js"></script> -->
-<!-- <script src="tasizan.js"></script> -->
-
 <script src="{% static 'js/google-blockly/blockly_compressed.js' %}"></script>
 <script src="{% static 'js/google-blockly/blocks_compressed.js' %}"></script>
 <script src="{% static 'js/google-blockly/javascript_compressed.js' %}"></script>
 <script src="{% static 'js/google-blockly/msg/js/ja.js' %}"></script>
 <script src="{% static 'js/tasizan.js' %}"></script>
-<script src="{% static 'js/index.js' %}"></script>
-
-
+<!-- <script src="tasizan.js"></script> -->
 <div id="canvas"></div>
 <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
     <block type="addition"></block>
@@ -57,7 +53,7 @@
         init: function (block) {
             this.jsonInit({
                 "type": "addition",
-                "message0": "%1 + %2",
+                "message0": "%1 たす %2",
                 "args0": [
                     {
                         "type": "input_value",
@@ -73,7 +69,7 @@
                 "inputsInline": true,
                 "output": "Number",
                 "colour": 0,
-                "tooltip": "2つの数字を足します",
+                "tooltip": "2つのすうじをたします",
                 "helpUrl": ""
             })
         }
@@ -87,7 +83,7 @@
         init: function (block) {
             this.jsonInit({
                 "type": "display",
-                "message0": "%1 の計算結果",
+                "message0": "%1 のけいさんけっか",
                 "args0": [
                     {
                         "type": "input_value",
@@ -102,7 +98,7 @@
     }
     Blockly.JavaScript.display = function(block) {
         var value = Blockly.JavaScript.valueToCode(block, 'value', Blockly.JavaScript.ORDER_NONE) || 0
-        return "var e = document.getElementById('dialog');e.textContent = '計算結果は ' + (" + value + ") + ' です！';e.style.display = ''"
+        return "var e = document.getElementById('dialog');e.textContent = 'けいさんけっかは ' + (" + value + ") + ' です！';e.style.display = ''"
     }
     var workspace = Blockly.inject('canvas', {
         toolbox: document.getElementById('toolbox'),

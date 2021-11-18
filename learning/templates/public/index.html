@@ -18,12 +18,18 @@
     <block type="go_up"></block>
     <block type="go_down"></block>
     <block type="test"></block>
+    <!-- <block type="number1"></block>-->
+    <block type="block"></block>
+
+
   </xml>
   <button id="showCode">JavaScriptを表示する</button>
   <script>
     var demoWorkspace = Blockly.inject('blocklyDiv',
-        {media: 'blockly/media/',
-        toolbox: document.getElementById('toolbox')});
+      {
+        media: 'blockly/media/',
+        toolbox: document.getElementById('toolbox')
+      });
 
     function genJavaScript() {
       Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
@@ -52,6 +58,7 @@
   <script src="{% static 'js/google-blockly/msg/js/ja.js' %}"></script>
 
   <!--<script src="lib/js-interpreter/acorn_interpreter.js"></script>-->
+  <!-- <script src="{% static 'js/number1.js' %}"></script> -->
   <script src="{% static 'js/mycode.js' %}"></script>
   <script src="{% static 'js/index.js' %}"></script>
 
