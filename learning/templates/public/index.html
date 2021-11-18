@@ -152,15 +152,15 @@
       //  const file = await showOpenFileDialog();
       //  const content = await readAsText(file);
       const file = document.getElementById('file').files[0];
-      alert(file.size);
+      //alert(file.size);
       const reader = new FileReader();
       reader.readAsText(file);
       reader.onload = function () { // 読みんこんだ後のコールバック
         const pre = document.getElementById('pre1');
         pre.innerHTML = reader.result;
-        alert("1" + reader.result);
+        //alert("1" + reader.result);
         var xml = Blockly.Xml.textToDom(reader.result);//window.localStorage[name]);
-        alert("2" + xml);
+        //alert("2" + xml);
         workspace.clear();
         Blockly.Xml.domToWorkspace(xml, workspace);
       };
