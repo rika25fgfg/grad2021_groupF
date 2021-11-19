@@ -153,3 +153,16 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_EMAIL_REQUIRED = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+#ログイン/ログアウト後の遷移先を設定
+LOGIN_REDIRECT_URL = 'learning:index'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
+
+#ログアウトリンクのクリック一発でログアウトする設定
+ACCOUNT_LOGOUT_ON_GET = True
+
+#django-allauthが送信するメールの件名に自動付与される接頭辞をブランクにする設定
+ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
+
+#デフォルトのメール送信元を設定
+DEFAULT_FROM_EMAIL = 'admin@example.com'
