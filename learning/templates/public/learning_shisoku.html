@@ -2,14 +2,19 @@
 {% load md5url %}
 <meta charset="UTF-8">
 <title>test</title>
+<!--<script src="https://cdn.jsdelivr.net/npm/blockly@3.20191014.3/blockly.min.js"></script>-->
+<!-- <script src="lib/google-blockly/blockly_compressed.js"></script> -->
+<!-- <script src="lib/google-blockly/blocks_compressed.js"></script> -->
+<!-- <script src="lib/google-blockly/javascript_compressed.js"></script> -->
+<!-- <script src="lib/google-blockly/msg/js/ja.js"></script> -->
 <pre id="pre1"></pre>
 <input type="file" id="file">
 <script src="{% static 'js/google-blockly/blockly_compressed.js' %}"></script>
 <script src="{% static 'js/google-blockly/blocks_compressed.js' %}"></script>
 <script src="{% static 'js/google-blockly/javascript_compressed.js' %}"></script>
 <script src="{% static 'js/google-blockly/msg/js/ja.js' %}"></script>
-<script src="{% static 'js/enzan.js' %}"></script>
-
+<script src="{% static 'js/tasizan.js' %}"></script>
+<!-- <script src="tasizan.js"></script> -->
 <div id="canvas"></div>
 <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
     <block type="addition"></block>
