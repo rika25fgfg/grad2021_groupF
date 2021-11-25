@@ -2,11 +2,8 @@
 {% load md5url %}
 <head>
 <meta charset="UTF-8">
-<title>test</title>
+<title>学習ページ(四則演算)</title>
 </head>
-
-
-
 <div id="canvas"></div>
 <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
     <block type="addition"></block>
@@ -25,13 +22,41 @@
     <block type="digit9"></block>
 </xml>
 
-<button id="run" type="button" style="font-size:20pt; border-radius:1em; position:fixed; bottom: 1em; right: 1em">実行</button>
+<button id="back" type="button"><a href="{% url 'learning:index' %}">戻る</a></button>
+<button id="run" type="button">実行</button>
+<div id="dialog" style="position:fixed;top:0;left:0;right:0;bottom:0;opacity:0.8;background-color:white;transition-duration:1s;color:black;font-size:20pt;text-align:center;padding-top:10em;z-index:9999999;display:none"></div>
 <pre id="pre1"></pre>
+{% if user.is_authenticated %}
 <input type="file" id="file">
 <button onclick="saveBlocks()" id="saveButton">保存</button>
 <button onclick="restoreBlocksFrom('test.txt')" id="restoreButton">復元</button> &nbsp;&nbsp;
-<div id="dialog" style="position:fixed;top:0;left:0;right:0;bottom:0;opacity:0.8;background-color:white;transition-duration:1s;color:black;font-size:20pt;text-align:center;padding-top:4em;z-index:9999999;display:none"></div>
+{% else %}
+<button id="login_button" type="button"><a class="nav-link js-scroll-trigger" href="{% url 'account_login' %}">ログイン</a></button>
+{% endif %}
 
+<style>
+    #canvas{
+        padding-top: 5px;
+        padding-right: 30%;
+        /* padding-bottom: 120px; */
+        height: 85%;
+    }
+    #run{
+    color: #fff;
+    background-color: #eb6100;
+    border-radius: 100vh;
+    border: none;
+    width: 80px;
+    height: 40px;
+    margin-left: 61%;
+    margin-top: 6px;
+    font-size: 17px;
+    }
+    #run:hover{
+    color: #fff;
+    background: #f56500;
+    }
+</style>
 
 <script src="{% static 'js/google-blockly/blockly_compressed.js' %}"></script>
 <script src="{% static 'js/google-blockly/blocks_compressed.js' %}"></script>
