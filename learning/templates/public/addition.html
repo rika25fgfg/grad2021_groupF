@@ -1,214 +1,59 @@
 {% load static %}
 {% load md5url %}
+<html>
 <meta charset="UTF-8">
 <title>test</title>
-<!--<script src="https://cdn.jsdelivr.net/npm/blockly@3.20191014.3/blockly.min.js"></script>-->
-<script src="{% md5url 'js/google-blockly/blockly_compressed.js' %}"></script>
-<script src="{% md5url 'js/google-blockly/blocks_compressed.js' %}"></script>
-<script src="{% md5url 'js/google-blockly/javascript_compressed.js' %}"></script>
-<script src="{% md5url 'js/google-blockly/processing_compressed.js' %}"></script>
-<script src="{% md5url 'js/google-blockly/msg/js/ja.js' %}"></script>
-<script src="{% md5url 'js/tasizan.js' %}"></script>
-<div id="canvas"></div>
-<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-    <block type="addition"></block>
-    <block type="subtraction"></block>
-    <block type="multiplication"></block>
-    <block type="division"></block>
-    <block type="display"></block>
-    <block type="digit1"></block>
-    <block type="digit2"></block>
-    <block type="digit3"></block>
-    <block type="digit4"></block>
-    <block type="digit5"></block>
-    <block type="digit6"></block>
-    <block type="digit7"></block>
-    <block type="digit8"></block>
-    <block type="digit9"></block>
-</xml>
-<button id="run" type="button"
-    style="font-size:20pt; border-radius:1em; position:fixed; bottom: 1em; right: 1em">実行</button>
-<div id="dialog"
-    style="position:fixed;top:0;left:0;right:0;bottom:0;opacity:0.8;background-color:white;transition-duration:1s;color:black;font-size:20pt;text-align:center;padding-top:4em;z-index:9999999;display:none">
-</div>
-<script>
-    for (var i = 1; i < 10; i++) {
-        (function (j) {
-            Blockly.Blocks['digit' + j] = {
-                init: function (block) {
-                    this.jsonInit({
-                        "type": "digit" + j,
-                        "message0": j.toString(),
-                        "output": "Number",
-                        "colour": j * 40,
-                        "tooltip": "",
-                        "helpUrl": ""
-                    })
-                }
-            }
-            Blockly.JavaScript['digit' + j] = function (block) {
-                return [j.toString(), Blockly.JavaScript.ORDER_NONE]
-            }
-        })(i)
+<!--<style>
+    #png {
+        text-align: right;
+        font-size: 20pt;
+        border-radius: 1em;
+        position: fixed;
+        bottom: 4em;
+        right: 1em;
     }
-    Blockly.Blocks.addition = {
-        init: function (block) {
-            this.jsonInit({
-                "type": "addition",
-                "message0": "%1 たす %2",
-                "args0": [
-                    {
-                        "type": "input_value",
-                        "name": "left_value",
-                        "check": "Number"
-                    },
-                    {
-                        "type": "input_value",
-                        "name": "right_value",
-                        "check": "Number"
-                    }
-                ],
-                "inputsInline": true,
-                "output": "Number",
-                "colour": 0,
-                "tooltip": "2つのすうじをたします",
-                "helpUrl": ""
-            })
-        }
-    }
-    Blockly.JavaScript.addition = function (block) {
-        var left_value = Blockly.JavaScript.valueToCode(block, 'left_value', Blockly.JavaScript.ORDER_NONE) || 0
-        var right_value = Blockly.JavaScript.valueToCode(block, 'right_value', Blockly.JavaScript.ORDER_NONE) || 0
-        return [left_value + ' + ' + right_value, Blockly.JavaScript.ORDER_NONE]
-    }
+</style>-->
 
-    Blockly.Blocks.subtraction = {
-        init: function (block) {
-            this.jsonInit({
-                "type": "subtraction",
-                "message0": "%1 ひく %2",
-                "args0": [
-                    {
-                        "type": "input_value",
-                        "name": "left_value",
-                        "check": "Number"
-                    },
-                    {
-                        "type": "input_value",
-                        "name": "right_value",
-                        "check": "Number"
-                    }
-                ],
-                "inputsInline": true,
-                "output": "Number",
-                "colour": 0,
-                "tooltip": "2つのすうじをひきます",
-                "helpUrl": ""
-            })
-        }
-    }
-    Blockly.JavaScript.subtraction = function (block) {
-        var left_value = Blockly.JavaScript.valueToCode(block, 'left_value', Blockly.JavaScript.ORDER_NONE) || 0
-        var right_value = Blockly.JavaScript.valueToCode(block, 'right_value', Blockly.JavaScript.ORDER_NONE) || 0
-        return [left_value + ' - ' + right_value, Blockly.JavaScript.ORDER_NONE]
-    }
+<body>
+    <div id="canvas"></div>
+    <xml id="toolbox" style="display: none">
+        <block type="addition"></block>
+        <block type="subtraction"></block>
+        <block type="multiplication"></block>
+        <block type="division"></block>
+        <block type="display"></block>
+        <block type="digit1"></block>
+        <block type="digit2"></block>
+        <block type="digit3"></block>
+        <block type="digit4"></block>
+        <block type="digit5"></block>
+        <block type="digit6"></block>
+        <block type="digit7"></block>
+        <block type="digit8"></block>
+        <block type="digit9"></block>
+    </xml>
+    <!--<div id="png">
+    <img src="{% static 'assets/img/sprites.png' %}"> 
+</div>-->
+    <button id="run" type="button"
+        style="font-size:20pt; border-radius:1em; position:fixed; bottom: 550px; right: 1em">実行</button>
 
-    Blockly.Blocks.multiplication = {
-        init: function (block) {
-            this.jsonInit({
-                "type": "multiplication",
-                "message0": "%1 かける %2",
-                "args0": [
-                    {
-                        "type": "input_value",
-                        "name": "left_value",
-                        "check": "Number"
-                    },
-                    {
-                        "type": "input_value",
-                        "name": "right_value",
-                        "check": "Number"
-                    }
-                ],
-                "inputsInline": true,
-                "output": "Number",
-                "colour": 0,
-                "tooltip": "2つのすうじをかけます",
-                "helpUrl": ""
-            })
-        }
-    }
-    Blockly.JavaScript.multiplication = function (block) {
-        var left_value = Blockly.JavaScript.valueToCode(block, 'left_value', Blockly.JavaScript.ORDER_NONE) || 0
-        var right_value = Blockly.JavaScript.valueToCode(block, 'right_value', Blockly.JavaScript.ORDER_NONE) || 0
-        return [left_value + ' * ' + right_value, Blockly.JavaScript.ORDER_NONE]
-    }
+    <button onclick="saveBlocks()" id="saveButton">保存</button>
+    <button onclick="restoreBlocksFrom('test.txt')" id="restoreButton">復元</button> &nbsp;&nbsp;
+    <div id="dialog"
+        style="position:fixed;top:0;left:0;right:0;bottom:0;opacity:0.8;background-color:white;transition-duration:1s;color:black;font-size:20pt;text-align:center;padding-top:4em;z-index:9999999;display:none">
+    </div>
+    <pre id="pre1"></pre>
+    <input type="file" id="file">
+    <!--<pre id='jsCode'></pre>-->
 
+    <script src="{% md5url 'js/google-blockly/blockly_compressed.js' %}"></script>
+    <script src="{% md5url 'js/google-blockly/blocks_compressed.js' %}"></script>
+    <script src="{% md5url 'js/google-blockly/javascript_compressed.js' %}"></script>
+    <script src="{% md5url 'js/google-blockly/msg/js/ja.js' %}"></script>
+    <script src="{% md5url 'js/tasizan.js' %}"></script>
+    <script src="{% md5url 'js/enzan.js' %}"></script>
+    <script src="{% md5url 'js/index.js' %}"></script>
+</body>
 
-    Blockly.Blocks.division = {
-        init: function (block) {
-            this.jsonInit({
-                "type": "division",
-                "message0": "%1 わる %2",
-                "args0": [
-                    {
-                        "type": "input_value",
-                        "name": "left_value",
-                        "check": "Number"
-                    },
-                    {
-                        "type": "input_value",
-                        "name": "right_value",
-                        "check": "Number"
-                    }
-                ],
-                "inputsInline": true,
-                "output": "Number",
-                "colour": 0,
-                "tooltip": "2つのすうじをわります",
-                "helpUrl": ""
-            })
-        }
-    }
-    Blockly.JavaScript.division = function (block) {
-        var left_value = Blockly.JavaScript.valueToCode(block, 'left_value', Blockly.JavaScript.ORDER_NONE) || 0
-        var right_value = Blockly.JavaScript.valueToCode(block, 'right_value', Blockly.JavaScript.ORDER_NONE) || 0
-        return [left_value + ' / ' + right_value, Blockly.JavaScript.ORDER_NONE]
-    }
-    Blockly.Blocks.display = {
-        init: function (block) {
-            this.jsonInit({
-                "type": "display",
-                "message0": "%1 のけいさんけっか",
-                "args0": [
-                    {
-                        "type": "input_value",
-                        "name": "value"
-                    }
-                ],
-                "colour": 230,
-                "tooltip": "",
-                "helpUrl": ""
-            })
-        }
-    }
-
-    Blockly.JavaScript.display = function (block) {
-        var value = Blockly.JavaScript.valueToCode(block, 'value', Blockly.JavaScript.ORDER_NONE) || 0
-        return "var e = document.getElementById('dialog');e.textContent = 'けいさんけっかは ' + (" + value + ") + ' です！';e.style.display = ''"
-    }
-    var workspace = Blockly.inject('canvas', {
-        toolbox: document.getElementById('toolbox'),
-        zoom: { startScale: 1.5 }
-    })
-    document.getElementById('run').addEventListener('click', function () {
-        try {
-            eval(Blockly.JavaScript.workspaceToCode(workspace))
-        } catch (e) {
-            alert(e)
-        }
-    })
-    document.getElementById('dialog').addEventListener('click', function (e) {
-        e.target.style.display = 'none'
-    })
-</script>
+</html>
