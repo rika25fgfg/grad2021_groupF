@@ -1,0 +1,141 @@
+{% load static %}
+{% load md5url %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Block</title>
+</head>
+
+<body>
+  <xml id="toolbox" style="display: none">
+    <block type="controls_repeat"></block>
+    <block type="text"></block>
+    <block type="text_print"></block>
+    <block type="go_left"></block>
+    <block type="go_right"></block>
+    <block type="go_up"></block>
+    <block type="go_down"></block>
+    <block type="test"></block>
+  </xml>
+  <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+  <button id="showCode">JavaScriptを表示する</button>
+  <p id="buttonRow">
+    <span>
+      <button onclick="runJavaScript(event)">実行</button>
+      <button onclick="saveBlocks()" id="saveButton">保存</button>
+      <button onclick="restoreBlocksFrom('test.txt')" id="restoreButton">復元</button> &nbsp;&nbsp;
+    </span>
+  </p>
+  <pre id="pre1"></pre>
+  <input type="file" id="file">
+  <pre id='jsCode'></pre>
+
+  <script>
+    var demoWorkspace = Blockly.inject('blocklyDiv',
+      {
+        media: 'blockly/media/',
+        toolbox: document.getElementById('toolbox')
+      });
+    //Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
+    //workspace);
+
+    function genJavaScript() {
+      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+      var code = Blockly.JavaScript.WorkspaceToCode(demoWorkspace);
+      //document.getElementById('code_output').value=code;
+      eval(code);
+    }
+
+    function runJavaScript(event) {
+      Blockly.JavaScript.addReservedWords('code');
+      var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+      try {
+        eval(code);
+      } catch (e) {
+        alert(e);
+      }
+    }
+
+    function showCode() {
+      //Generate Processing code and display it.
+      Blockly.Processing.INFINITE_LOOP_TRAP = null;
+      var code = Blockly.Processing.workspaceToCode(workspace);
+      alert(code);
+    }
+    function showXml() {
+      var xml = Blockly.Xml.workspaceToDom(workspace);
+      var code = Blockly.Xml.domToPrettyText(xml);
+      alert(code);
+    }
+
+    /** ローカルストレージに保存するときのキー接頭辞 */
+    var savedBlockPrefix = '/static/assets/';
+
+    //* ブロックを保存 */
+    function saveBlocks() {
+      //if ('localStorage' in window) {
+      //  var name = null;
+      //  while (!name) {
+      //    name = window.prompt('プログラム名を入力してください');
+      //    if (!name) { return; } // ignore if empty
+      //    if (window.localStorage[savedBlockPrefix + name]) {
+      //      if (!window.confirm(name + ' は存在します。上書きしますか?')) {
+      //        name = null;
+      //      }
+      //    }
+      //  }
+      name = savedBlockPrefix + name;
+      var xml = Blockly.Xml.workspaceToDom(workspace);
+      alert(Blockly.Xml.domToText(xml));
+      const blob = new Blob([Blockly.Xml.domToText(xml)], { type: "text/plain" });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = savedBlockPrefix + 'test.txt';
+      link.click();
+      //window.localStorage.setItem(name, Blockly.Xml.domToText(xml));
+      //}
+    }
+
+    //復元
+    function restoreBlocksFrom(name) {
+      const file = document.getElementById('file').files[0];
+      //alert(file.size);
+      const reader = new FileReader();
+      reader.readAsText(file);
+      reader.onload = function () { // 読みんこんだ後のコールバック
+        const pre = document.getElementById('pre1');
+        pre.innerHTML = reader.result;
+        //alert("1" + reader.result);
+        var xml = Blockly.Xml.textToDom(reader.result);//window.localStorage[name]);
+        //alert("2" + xml);
+        workspace.clear();
+        Blockly.Xml.domToWorkspace(xml, workspace);
+      };
+
+
+
+    }
+
+    function cancelRestoreBlocks() {
+      var modal = document.getElementById('restoreModal');
+      modal.style.display = 'none';
+    }
+
+    function pressCancelRestoreBlocks(event) {
+      var modal = document.getElementById('restoreModal');
+      if (event.target == modal) {
+        cancelRestoreBlocks();
+      }
+    }
+  </script>
+  <script src="{% md5url 'js/google-blockly/blockly_compressed.js' %}"></script>
+  <script src="{% md5url 'js/google-blockly/blocks_compressed.js' %}"></script>
+  <script src="{% md5url 'js/google-blockly/javascript_compressed.js' %}"></script>
+  <script src="{% md5url 'js/google-blockly/processing_compressed.js' %}"></script>
+  <script src="{% md5url 'js/google-blockly/msg/js/ja.js' %}"></script>
+  <script src="{% md5url 'js/mycode.js' %}"></script>
+  <script src="{% md5url 'js/index.js' %}"></script>
+</body>
+
+</html>

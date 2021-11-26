@@ -6,7 +6,7 @@ class IndexView(generic.TemplateView):
     template_name = "index.html"
 
 class BlockView(generic.TemplateView):
-    template_name = "public/index.html"
+    template_name = "public/block.html"
 
 class EnzanView(generic.TemplateView):
     template_name = "public/addition.html"
