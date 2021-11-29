@@ -8,27 +8,27 @@ var savedBlockPrefix = '/static/assets/';
 
 function saveBlocks() {
 
-    if ('localStorage' in window) {
+    // if ('localStorage' in window) {
 
-        var name = null;
+    //     var name = null;
 
-        while (!name) {
+    //     while (!name) {
 
-            name = window.prompt('プログラム名を入力してください');
+    //         name = window.prompt('プログラム名を入力してください');
 
-            if (!name) { return; } // ignore if empty
+    //         if (!name) { return; } // ignore if empty
 
-            if (window.localStorage[savedBlockPrefix + name]) {
+    //         if (window.localStorage[savedBlockPrefix + name]) {
 
-                if (!window.confirm(name + ' は存在します。上書きしますか?')) {
+    //             if (!window.confirm(name + ' は存在します。上書きしますか?')) {
 
-                    name = null;
+    //                 name = null;
 
-                }
+    //             }
 
-            }
+    //         }
 
-        }
+    //     }
 
         name = savedBlockPrefix + name;
 
@@ -50,7 +50,7 @@ function saveBlocks() {
 
     }
 
-}
+
 
 
 //復元
