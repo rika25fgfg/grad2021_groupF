@@ -1,22 +1,24 @@
-<!DOCTYPE html>
-<html lang="ja">
+{% extends 'base.html' %}
+{% load md5url %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>アンケート送信画面</title>
-</head>
+{% block titile %}入学促進学習サイト{% endblock %}
+{% block content %}
+<!-- Page Content-->
+<div class="container-fluid p-0">
+    <!-- About-->
+    <section class="resume-section" id="about">
+        <div class="resume-section-content">
+            <h5>アンケートの送信が完了しました。
+                ご協力ありがとうございました。
+            </h5>
+        </div>
+    </section>
+</div>
+
 <style>
-    body {
+    h5{
         text-align: center;
     }
 </style>
-
-<body>
-    <h1>アンケートの送信が完了しました。</h1>
-    <h1>ご協力ありがとうございました。</h1>
-</body>
-<a href="/"><button>ホームに戻る</button></a>
-
-</html>
+{% endblock %}
