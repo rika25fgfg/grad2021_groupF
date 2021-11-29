@@ -285,6 +285,7 @@ Blockly.JavaScript.display = function (block) {
 }
 var workspace = Blockly.inject('canvas', {
     toolbox: document.getElementById('toolbox'),
+    trashcan: true,
     zoom: { startScale: 1.5 }
 })
 document.getElementById('run').addEventListener('click', function () {
