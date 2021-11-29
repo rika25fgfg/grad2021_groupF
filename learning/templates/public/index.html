@@ -18,7 +18,6 @@
     <block type="go_up"></block>
     <block type="go_down"></block>
     <block type="test"></block>
-    <!-- <block type="number1"></block>-->
     <block type="block"></block>
 
 
@@ -34,7 +33,6 @@
     function genJavaScript() {
       Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
       var code = Blockly.JavaScript.WorkspaceToCode(demoWorkspace);
-      //document.getElementById('code_output').value=code;
       eval(code);
     }
 

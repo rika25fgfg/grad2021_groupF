@@ -9,8 +9,10 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-
+from logging import INFO
 import os
+from django.contrib import messages
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -166,3 +168,11 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 
 #デフォルトのメール送信元を設定
 DEFAULT_FROM_EMAIL = 'admin@example.com'
+
+from django.contrib.messages import constants as messages
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+#from .setting_common import *
+
