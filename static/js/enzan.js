@@ -153,7 +153,7 @@ Blockly.Blocks.addition = {
             "inputsInline": true,
             "output": "Number",
             "colour": 0,
-            "tooltip": "2つのすうじをたします",
+            "tooltip": "2つの数字を足します",
             "helpUrl": ""
         })
     }
