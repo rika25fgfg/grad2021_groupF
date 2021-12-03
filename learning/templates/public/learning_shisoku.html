@@ -30,8 +30,9 @@
 <pre id="pre1"></pre>
 {% if user.is_authenticated %}
 <input type="file" id="file">
-<button onclick="saveBlocks()" id="saveButton">保存</button>
 <button onclick="restoreBlocksFrom('test.txt')" id="restoreButton">復元</button> &nbsp;&nbsp;
+
+<button onclick="saveBlocks()" id="saveButton">保存</button>
 {% else %}
 <button id="login_button" type="button"><a class="nav-link js-scroll-trigger" href="{% url 'account_login' %}">ログイン</a></button>
 {% endif %}
