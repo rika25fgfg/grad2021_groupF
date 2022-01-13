@@ -51,6 +51,17 @@ Blockly.defineBlocksWithJsonArray(
        "colour": 230,
        "tooltip": "",
        "helpUrl": ""
+    },
+
+    {
+      "type": "block",
+      "message0": "左へすすむ",
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": 230,
+      "tooltip": "左へすすむことができます",
+      "helpUrl": ""
     }
     
 ]);
@@ -83,3 +94,10 @@ Blockly.defineBlocksWithJsonArray(
         // var code = 'alert();'
         return code;
     };
+
+    Blockly.JavaScript['block'] = function(block) {
+      var statements = Blockly.JavaScript.statementToCode(block, 'NAME');
+      // var code = 'console.log("左へすすむ");\n';
+      var code = 'alert("左へすすむ");'
+      return code;
+  };
