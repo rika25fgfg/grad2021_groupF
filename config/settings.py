@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.line',         #追加(LINEログイン)
 ]
 
 MIDDLEWARE = [
@@ -157,7 +158,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 #ログイン/ログアウト後の遷移先を設定
-LOGIN_REDIRECT_URL = 'learning:index'
+LOGIN_REDIRECT_URL = '/' #'learning:index'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
 
 #ログアウトリンクのクリック一発でログアウトする設定
@@ -176,3 +177,13 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 #from .setting_common import *
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+SOCIALACCOUNT_PROVIDERS = {
+    'line': {
+        'SCOPE': ['profile','openid'],
+    }
+}
