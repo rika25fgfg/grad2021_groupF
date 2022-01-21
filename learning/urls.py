@@ -7,4 +7,5 @@ urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('block', views.BlockView.as_view(), name='block'),
     path('enzan', views.EnzanView.as_view(), name='enzan'),
+    path('stoplight', views.StoplightView.as_view(), name="stoplight"),
 ]
