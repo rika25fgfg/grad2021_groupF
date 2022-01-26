@@ -8,17 +8,38 @@
 </head>
 
 <body>
+  <!-- XMLでツールボックスを定義 -->
   <xml id="toolbox" style="display: none">
-    <block type="controls_repeat"></block>
-    <block type="text"></block>
-    <block type="text_print"></block>
-    <block type="go_left"></block>
-    <block type="go_right"></block>
-    <block type="go_up"></block>
-    <block type="go_down"></block>
-    <block type="test"></block>
+    <category name="分岐" colour="220">
+      <block type="controls_if"></block>
+      <block type="controls_ifelse"></block>
+      <block type="logic_compare"></block>
+      <block type="logic_operation"></block>
+      <block type="logic_negate"></block>
+      <block type="logic_boolean"></block>
+    </category>
+    <category name="反復" colour="110">
+      <block type="controls_repeat"></block>
+      <block type="controls_whileuntil"></block>
+      <block type="controls_loop"></block>
+    </category>
+    <category name="テキスト入出力" colour="150">
+      <block type="text"></block>
+      <block type="text_print"></block>
+    </category>
+    <category name="変数の作成" colour="330" custom="VARIABLE">
+    </category>
+    <category name="その他">
+      <block type="go_left"></block>
+      <block type="go_right"></block>
+      <block type="go_up"></block>
+      <block type="go_down"></block>
+      <block type="test"></block>
+    </category>
   </xml>
-  <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+  <!-- ワークスペースのエリア -->
+  <div id="blocklyDiv" style="height: 450px; width: 800px;"></div>
+
   <button id="showCode">JavaScriptを表示する</button>
   <p id="buttonRow">
     <span>
@@ -32,6 +53,7 @@
   <pre id='jsCode'></pre>
 
   <script>
+    //Blocklyをdivにはめ込み
     var demoWorkspace = Blockly.inject('blocklyDiv',
       {
         media: 'blockly/media/',
@@ -94,7 +116,6 @@
       link.download = savedBlockPrefix + 'test.txt';
       link.click();
       //window.localStorage.setItem(name, Blockly.Xml.domToText(xml));
-      //}
     }
 
     //復元
@@ -134,6 +155,7 @@
   <script src="{% md5url 'js/google-blockly/javascript_compressed.js' %}"></script>
   <script src="{% md5url 'js/google-blockly/processing_compressed.js' %}"></script>
   <script src="{% md5url 'js/google-blockly/msg/js/ja.js' %}"></script>
+  <script src="{% md5url 'ls/controls.js' %}"></script>
   <script src="{% md5url 'js/mycode.js' %}"></script>
   <script src="{% md5url 'js/index.js' %}"></script>
 </body>
