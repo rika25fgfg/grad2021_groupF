@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.line',         #追加(LINEログイン)
+    'social_django'     #追加google-login
 ]
 
 MIDDLEWARE = [
@@ -59,6 +61,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',  # 追加
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -74,6 +78,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',  # <- Here
+                'social_django.context_processors.login_redirect', # <- Here
             ],
         },
     },
@@ -146,6 +152,13 @@ AUTHENTION_BACKENDS = (
     #管理サイト用(ユーザー名認証)
 )
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.open_id.OpenIdAuth',  #for Google authentication
+    'social_core.backends.google.GoogleOAuth2',  # for Google authentication
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 #メールアドレス認証に変更する設定
 ACCOUNT_AUTHENICATION_METHOD = 'email'
 ACCOUNT_USERNAME_REQUIRED = False
@@ -157,7 +170,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 #ログイン/ログアウト後の遷移先を設定
-LOGIN_REDIRECT_URL = 'learning:index'
+LOGIN_REDIRECT_URL = '/' #'learning:index'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
 
 #ログアウトリンクのクリック一発でログアウトする設定
@@ -174,5 +187,12 @@ from django.contrib.messages import constants as messages
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
-#from .setting_common import *
 
+SOCIALACCOUNT_PROVIDERS = {
+    'line': {
+        'SCOPE': ['profile','openid'],
+    }
+}
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '325642108189-e46drprmu5fpqf29b8h0jjiib05hr4ff.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
