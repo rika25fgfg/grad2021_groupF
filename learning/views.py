@@ -7,6 +7,7 @@ from django.core.mail import message
 from django.http import request
 from django.shortcuts import render
 from django.views import generic
+from django.http import HttpResponseRedirect
 
 
 class IndexView(generic.TemplateView):
@@ -47,3 +48,6 @@ class Question_confirmView(generic.FormView):
     template_name = "question_confirm.html"
     form_class = QuestionForm
     success_url = reverse_lazy('learning:question_done')
+
+def LoginView(request):
+    return HttpResponseRedirect('social:begin', kwargs=dict(backend='google-oauth2'))
