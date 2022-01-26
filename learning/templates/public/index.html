@@ -4,11 +4,12 @@
 <html>
 
 <head>
-  <title>Getting started with Blockly</title>
+  <title>問題ページ</title>
 </head>
 
 <body>
-  <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+
+  <div id="blocklyDiv" style="height: 500px; width: 750px; float: left;"></div>
   <xml id="toolbox" style="display: none">
     <block type="controls_repeat"></block>
     <block type="text"></block>
@@ -18,10 +19,19 @@
     <block type="go_up"></block>
     <block type="go_down"></block>
     <block type="test"></block>
-    <block type="block"></block>
+    <block type="controls_whileuntil"></block>
 
 
   </xml>
+  <div class = "question">
+    <h4>&nbsp;&nbsp;&nbsp;「for文のプログラムです。」を10回表示するブロックを作成しなさい。</h4>
+    <br>
+    <h4>&nbsp;&nbsp;&nbsp;「あいうえお」と表示するブロックを作成しなさい。</h4>
+    <br>
+    <h4>&nbsp;&nbsp;&nbsp;</h4>
+
+</div>
+
   <button id="showCode">JavaScriptを表示する</button>
   <script>
     var demoWorkspace = Blockly.inject('blocklyDiv',
@@ -50,6 +60,7 @@
   <p><button onclick="runJavaScript(event)">実行</button></p>
   <pre id='jsCode'></pre>
 
+
   <script src="{% static 'js/google-blockly/blockly_compressed.js' %}"></script>
   <script src="{% static 'js/google-blockly/blocks_compressed.js' %}"></script>
   <script src="{% static 'js/google-blockly/javascript_compressed.js' %}"></script>
@@ -61,6 +72,32 @@
   <script src="{% static 'js/index.js' %}"></script>
 
 
+
+
 </body>
+
+<style>
+  .question{
+    float: left;
+  }
+
+  p{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+  }
+  #showCode{
+    position: absolute;
+    bottom: 25px;
+    left: 70px;
+
+  }
+
+  #jsCode {
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+  }
+</style>
 
 </html>

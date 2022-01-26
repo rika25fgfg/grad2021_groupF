@@ -9,4 +9,6 @@ urlpatterns = [
     path('question_done/',views.Question_doneView.as_view(),name="question_done"),
     path('block', views.BlockView.as_view(), name='block'),
     path('enzan', views.EnzanView.as_view(), name='enzan'),
+
+
 ]

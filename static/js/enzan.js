@@ -8,28 +8,6 @@ var savedBlockPrefix = '/static/assets/';
 
 function saveBlocks() {
 
-    // if ('localStorage' in window) {
-
-    //     var name = null;
-
-    //     while (!name) {
-
-    //         name = window.prompt('プログラム名を入力してください');
-
-    //         if (!name) { return; } // ignore if empty
-
-    //         if (window.localStorage[savedBlockPrefix + name]) {
-
-    //             if (!window.confirm(name + ' は存在します。上書きしますか?')) {
-
-    //                 name = null;
-
-    //             }
-
-    //         }
-
-    //     }
-
         name = savedBlockPrefix + name;
 
         var xml = Blockly.Xml.workspaceToDom(workspace);

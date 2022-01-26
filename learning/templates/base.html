@@ -33,7 +33,10 @@
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'learning:index' %}">Home</a>
                 </li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'learning:enzan' %}">学習ページ</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'learning:enzan' %}">四則演算</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'learning:block' %}">問題ページ</a></li>
+
+
                 {% if user.is_authenticated %}
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'learning:question' %}">アンケート</a></li>
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'account_logout' %}">Logout</a>
