@@ -10,6 +10,3 @@ class BlockView(generic.TemplateView):
 
 class EnzanView(generic.TemplateView):
     template_name = "public/addition.html"
-
-class StoplightView(generic.TemplateView):
-    template_name = "public/stoplight.html"
