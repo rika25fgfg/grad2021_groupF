@@ -22,6 +22,7 @@
         <block type="multiplication"></block>
         <block type="division"></block>
         <block type="display"></block>
+        <block type="digit0"></block>
         <block type="digit1"></block>
         <block type="digit2"></block>
         <block type="digit3"></block>
@@ -32,9 +33,6 @@
         <block type="digit8"></block>
         <block type="digit9"></block>
     </xml>
-    <!--<div id="png">
-    <img src="{% static 'assets/img/sprites.png' %}"> 
-</div>-->
     <button id="run" type="button"
         style="font-size:20pt; border-radius:1em; position:fixed; bottom: 550px; right: 1em">実行</button>
 
@@ -53,7 +51,6 @@
     <script src="{% md5url 'js/google-blockly/msg/js/ja.js' %}"></script>
     <script src="{% md5url 'js/tasizan.js' %}"></script>
     <script src="{% md5url 'js/enzan.js' %}"></script>
-    <script src="{% md5url 'js/index.js' %}"></script>
 </body>
 
 </html>
