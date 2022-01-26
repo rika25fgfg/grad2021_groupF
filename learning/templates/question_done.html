@@ -14,9 +14,11 @@
 </style>
 
 <body>
-    <h1>アンケートの送信が完了しました。</h1>
-    <h1>ご協力ありがとうございました。</h1>
+
+    <h1>この内容でいいですか？</h1>
+    {{form}}
 </body>
-<a href="/"><button>ホームに戻る</button></a>
+<a href="/"><button>送信</button></a>
+<button onclick="history.back()">戻る</button>
 
 </html>

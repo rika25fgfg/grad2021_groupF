@@ -8,8 +8,8 @@ from django.http import request
 from django.shortcuts import render
 from django.views import generic
 from .forms import QuestionForm #, learningCreateForm
-
-
+from django.shortcuts import redirect
+ 
 logger = logging.getLogger(__name__)
 
 def index(request):
@@ -38,3 +38,17 @@ class Question_confirmView(generic.FormView):
     template_name = "question_confirm.html"
     form_class = QuestionForm
     success_url = reverse_lazy('learning:question_done')
+
+def QuestionCreateView(request):
+    if request.method == 'GET':
+        form = QuestionForm(request.session.get('form_data'))
+    else:
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            request.session['form_data'] = request.POST
+            return redirect('learning/question_done/message')
+    context = {
+        'form': form,
+    }
+    return render(request, 'question_done.html', context)
