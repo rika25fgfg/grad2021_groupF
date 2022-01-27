@@ -39,12 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'learning.apps.LearningConfig',
     'django_static_md5url',
-
     'accounts.apps.AccountsConfig',
-
     'django.contrib.sites',
     'allauth',
     'allauth.account',

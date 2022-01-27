@@ -1,4 +1,5 @@
 
+
 /** ローカルストレージに保存するときのキー接頭辞 */
 
 var savedBlockPrefix = '/static/assets/';
@@ -61,13 +62,13 @@ function restoreBlocksFrom(name) {
 
     };
 
-
-
-
 }
 
 
+
+
 function cancelRestoreBlocks() {
+
 
     var modal = document.getElementById('restoreModal');
 
@@ -90,7 +91,15 @@ function pressCancelRestoreBlocks(event) {
 
 
 
-for (var i = 0; i < 10; i++) {
+
+function pressCancelRestoreBlocks(event) {
+    var modal = document.getElementById('restoreModal');
+    if (event.target == modal) {
+        cancelRestoreBlocks();
+    }
+}
+
+for (var i = 1; i < 10; i++) {
     (function (j) {
         Blockly.Blocks['digit' + j] = {
             init: function (block) {
@@ -109,6 +118,7 @@ for (var i = 0; i < 10; i++) {
         }
     })(i)
 }
+
 
 // たし算
 Blockly.Blocks.addition = {
@@ -239,7 +249,6 @@ Blockly.JavaScript.division = function (block) {
     return [left_value + ' / ' + right_value, Blockly.JavaScript.ORDER_NONE]
 }
 
-
 Blockly.Blocks.display = {
     init: function (block) {
         this.jsonInit({
@@ -276,5 +285,4 @@ document.getElementById('run').addEventListener('click', function () {
 })
 document.getElementById('dialog').addEventListener('click', function (e) {
     e.target.style.display = 'none'
-})
-
+});

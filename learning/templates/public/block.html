@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<h4>あいうえおを表示するブロックを作成してください。</h4>
+<h4>「for文のプログラムです。」を10回表示するブロックを作成してください。</h4>
 
   <!-- XMLでツールボックスを定義 -->
   <xml id="toolbox" style="display: none">
@@ -55,9 +55,10 @@
     <span>
       <button onclick="runJavaScript(event)">実行</button>
       {% if user.is_authenticated %}
-      <input type="file" id="file">
-      <button onclick="restoreBlocksFrom('test.txt')" id="restoreButton">復元</button> &nbsp;&nbsp;
-      <button onclick="saveBlocks()" id="saveButton">保存</button>
+<input type="file" id="file">
+<button onclick="restoreBlocksFrom('test.txt')" id="restoreButton">復元</button> &nbsp;&nbsp;
+
+<button onclick="saveBlocks()" id="saveButton">保存</button>
 <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="共有する際のテキストをここに入れる" data-show-count="false">Tweet</a>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
@@ -184,7 +185,7 @@ LINE共有
   </script>
 
 
-<!-- <button id="next" type="button"><a href="{% url 'learning:question2' %}">次の問題</a></button> -->
+<button id="next" type="button"><a href="{% url 'learning:question2' %}">次の問題</a></button>
 
   <script src="{% md5url 'js/google-blockly/blockly_compressed.js' %}"></script>
   <script src="{% md5url 'js/google-blockly/blocks_compressed.js' %}"></script>
@@ -199,7 +200,7 @@ LINE共有
 
   h4 {
     float: right;
-    padding-right: 10%;
+    margin-left: 10px;
 
   }
 </style>

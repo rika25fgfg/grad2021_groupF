@@ -1,3 +1,4 @@
+
 import logging
 from django.contrib import messages
 from django.contrib.messages.api import success
@@ -13,7 +14,7 @@ from django.http import HttpResponseRedirect
 class IndexView(generic.TemplateView):
     template_name = "index.html"
 class BlockView(generic.TemplateView):
-    template_name = "public/index.html"
+    template_name = "public/block.html"
 class EnzanView(generic.TemplateView):
     template_name = "public/learning_shisoku.html"
 class Question2View(generic.TemplateView):
@@ -53,3 +54,5 @@ class Question_confirmView(generic.FormView):
 
 def LoginView(request):
     return HttpResponseRedirect('social:begin', kwargs=dict(backend='google-oauth2'))
+
+

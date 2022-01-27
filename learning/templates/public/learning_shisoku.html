@@ -34,11 +34,6 @@
 <button onclick="restoreBlocksFrom('test.txt')" id="restoreButton">復元</button> &nbsp;&nbsp;
 
 <button onclick="saveBlocks()" id="saveButton">保存</button>
-{% else %}
-<button id="login_button" type="button"><a class="nav-link js-scroll-trigger" href="{% url 'account_login' %}">ログイン</a></button>
-{% endif %}
-
-
 <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="共有する際のテキストをここに入れる" data-show-count="false">Tweet</a>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
@@ -49,6 +44,12 @@ LINE共有
 
 <div class="line-it-button" data-lang="ja" data-type="share-a" data-env="REAL" data-url="http://127.0.0.1:8000/enzan" data-color="default" data-size="small" data-count="false" data-ver="3" style="display: none;"></div>
 <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+
+{% else %}
+<button id="login_button" type="button"><a class="nav-link js-scroll-trigger" href="{% url 'account_login' %}">ログイン</a></button>
+{% endif %}
+
+
 
 <style>
     #canvas{

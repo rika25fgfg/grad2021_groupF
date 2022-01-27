@@ -1,4 +1,5 @@
 from django.urls import path
+from django.urls.resolvers import URLPattern
 from . import views
 
 app_name = 'learning'
@@ -10,8 +11,4 @@ urlpatterns = [
     path('block', views.BlockView.as_view(), name='block'),
     path('enzan', views.EnzanView.as_view(), name='enzan'),
     path('question2', views.Question2View.as_view(), name='question2'),
-
-
-
-
 ]
