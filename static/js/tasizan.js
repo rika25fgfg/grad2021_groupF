@@ -1,10 +1,3 @@
-Blockly.JavaScript['digit0'] = function (block) {
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...';
-  // TODO: Change ORDER_NONE to the correct strength.
-  return [code, Blockly.JavaScript.ORDER_NONE];
-};
-
 Blockly.JavaScript['digit1'] = function (block) {
   // TODO: Assemble JavaScript into code varlabel. 
   var code = '...';
