@@ -99,7 +99,8 @@ function pressCancelRestoreBlocks(event) {
     }
 }
 
-for (var i = 1; i < 10; i++) {
+
+for (var i = 0; i < 10; i++) {
     (function (j) {
         Blockly.Blocks['digit' + j] = {
             init: function (block) {
@@ -113,8 +114,8 @@ for (var i = 1; i < 10; i++) {
                 })
             }
         }
-        Blockly.JavaScript['digit' + j] = function (block) {
-            return [j.toString(), Blockly.JavaScript.ORDER_NONE]
+        Blockly.JavaScript['digit' + j] = function(block) {
+            return [ j.toString(), Blockly.JavaScript.ORDER_NONE ]
         }
     })(i)
 }
