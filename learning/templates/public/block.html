@@ -18,16 +18,22 @@
       <block type="logic_negate"></block>
       <block type="logic_boolean"></block>
     </category>
-    <category name="反復" colour="110">
+    <category name="ループ" colour="110">
       <block type="controls_repeat"></block>
-      <block type="controls_whileuntil"></block>
+      <!--<block type="controls_whileuntil"></block>
       <block type="controls_loop"></block>
+      <block type="controls_count"></block>-->
+    </category>
+    <!--<category name="数値" colour="300">
+      <block type="number">
+        <field name="NUM">123</field>
+      </block>
+    </category>-->
+    <category name="変数の作成" colour="330" custom="VARIABLE">
     </category>
     <category name="テキスト入出力" colour="150">
       <block type="text"></block>
       <block type="text_print"></block>
-    </category>
-    <category name="変数の作成" colour="330" custom="VARIABLE">
     </category>
     <category name="その他">
       <block type="go_left"></block>
@@ -35,6 +41,8 @@
       <block type="go_up"></block>
       <block type="go_down"></block>
       <block type="test"></block>
+      <!--<block type="pass"></block>
+      <block type="failure"></block>-->
     </category>
   </xml>
   <!-- ワークスペースのエリア -->
@@ -155,7 +163,6 @@
   <script src="{% md5url 'js/google-blockly/javascript_compressed.js' %}"></script>
   <script src="{% md5url 'js/google-blockly/processing_compressed.js' %}"></script>
   <script src="{% md5url 'js/google-blockly/msg/js/ja.js' %}"></script>
-  <script src="{% md5url 'ls/controls.js' %}"></script>
   <script src="{% md5url 'js/mycode.js' %}"></script>
   <script src="{% md5url 'js/index.js' %}"></script>
 </body>
