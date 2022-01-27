@@ -9,9 +9,8 @@
 
 <body>
 <h4>あいうえおを表示するブロックを作成してください。</h4>
-
   <!-- XMLでツールボックスを定義 -->
-  <xml id="toolbox" style="display: none">
+  <xml style="display: none" id="toolbox" xmlns="https://developers.google.com/blockly/xml">
     <category name="分岐" colour="220">
       <block type="controls_if"></block>
       <block type="controls_ifelse"></block>
@@ -20,17 +19,143 @@
       <block type="logic_negate"></block>
       <block type="logic_boolean"></block>
     </category>
-    <category name="ループ" colour="110">
-      <block type="controls_repeat"></block>
-      <!--<block type="controls_whileuntil"></block>
-      <block type="controls_loop"></block>
-      <block type="controls_count"></block>-->
-    </category>
-    <!--<category name="数値" colour="300">
-      <block type="number">
-        <field name="NUM">123</field>
+    <category colour="#5ba55b" name="ループ">
+      -<block type="controls_repeat_ext">
+        -<value name="TIMES">
+          -<shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
       </block>
-    </category>-->
+      -<block type="controls_whileUntil">
+        <field name="MODE">WHILE</field>
+      </block>
+      -<block type="controls_for">
+        <field id="s6vrUO]l|4kGi^^tw_m?" name="VAR">i</field>
+        -<value name="FROM">
+          -<shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        -<value name="TO">
+          -<shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+        -<value name="BY">
+          -<shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      -<block type="controls_forEach">
+        <field id="=4:vmRC8pbpX6myK#%I+" name="VAR">j</field>
+      </block>
+      -<block type="controls_flow_statements">
+        <field name="FLOW">BREAK</field>
+      </block>
+    </category>
+    <category colour="#5b67a5" name="数値">
+      -<block type="math_number">
+        <field name="NUM">0</field>
+      </block>
+      -<block type="math_arithmetic">
+        <field name="OP">ADD</field>
+        -<value name="A">
+          -<shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        -<value name="B">
+          -<shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      -<block type="math_single">
+        <field name="OP">ROOT</field>
+        -<value name="NUM">
+          -<shadow type="math_number">
+            <field name="NUM">9</field>
+          </shadow>
+        </value>
+      </block>
+      -<block type="math_trig">
+        <field name="OP">SIN</field>
+        -<value name="NUM">
+          -<shadow type="math_number">
+            <field name="NUM">45</field>
+          </shadow>
+        </value>
+      </block>
+      -<block type="math_constant">
+        <field name="CONSTANT">PI</field>
+      </block>
+      -<block type="math_number_property">
+        <mutation divisor_input="false" />
+        <field name="PROPERTY">EVEN</field>
+        -<value name="NUMBER_TO_CHECK">
+          -<shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      -<block type="math_round">
+        <field name="OP">ROUND</field>
+        -<value name="NUM">
+          -<shadow type="math_number">
+            <field name="NUM">3.1</field>
+          </shadow>
+        </value>
+      </block>
+      -<block type="math_on_list">
+        <mutation op="SUM" />
+        <field name="OP">SUM</field>
+      </block>
+      -<block type="math_modulo">
+        -<value name="DIVIDEND">
+          -<shadow type="math_number">
+            <field name="NUM">64</field>
+          </shadow>
+        </value>
+        -<value name="DIVISOR">
+          -<shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      -<block type="math_constrain">
+        -<value name="VALUE">
+          -<shadow type="math_number">
+            <field name="NUM">50</field>
+          </shadow>
+        </value>
+        -<value name="LOW">
+          -<shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        -<value name="HIGH">
+          -<shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+      </block>
+      -<block type="math_random_int">
+        -<value name="FROM">
+          -<shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        -<value name="TO">
+          -<shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_random_float" />
+    </category>
+
     <category name="変数の作成" colour="330" custom="VARIABLE">
     </category>
     <category name="テキスト入出力" colour="150">
@@ -43,20 +168,23 @@
       <block type="go_up"></block>
       <block type="go_down"></block>
       <block type="test"></block>
-      <!--<block type="pass"></block>
-      <block type="failure"></block>-->
     </category>
   </xml>
   <!-- ワークスペースのエリア -->
   <div id="blocklyDiv" style="height: 450px; width: 800px;"></div>
 
   <button id="showCode">JavaScriptを表示する</button>
+  <pre id="pre1"></pre>
+  <pre id='jsCode'></pre>
+  <button onclick="runJavaScript(event)">実行</button>
   <p id="buttonRow">
     <span>
-      <button onclick="runJavaScript(event)">実行</button>
       {% if user.is_authenticated %}
-      <input type="file" id="file">
+      <!-- <input type="file" id="file"> -->
       <button onclick="restoreBlocksFrom('test.txt')" id="restoreButton">復元</button> &nbsp;&nbsp;
+
+<input type="file" id="file">
+
       <button onclick="saveBlocks()" id="saveButton">保存</button>
 <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="共有する際のテキストをここに入れる" data-show-count="false">Tweet</a>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -76,7 +204,7 @@ LINE共有
     </span>
   </p>
   <pre id="pre1"></pre>
-  <input type="file" id="file">
+  <!-- <input type="file" id="file"> -->
   <pre id='jsCode'></pre>
 
 
