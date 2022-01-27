@@ -16,6 +16,8 @@ class BlockView(generic.TemplateView):
     template_name = "public/index.html"
 class EnzanView(generic.TemplateView):
     template_name = "public/learning_shisoku.html"
+class Question2View(generic.TemplateView):
+    template_name = "public/question2.html"
 
 from .forms import QuestionForm #, learningCreateForm
 

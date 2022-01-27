@@ -78,6 +78,17 @@ Blockly.defineBlocksWithJsonArray(
       "helpUrl": ""
     },
 
+    {
+        "type": "gokaku",
+        "message0": "合格",
+        "inputsInline": true,
+        "previousStatement": null,
+        "nextStatement": null,
+        "colour": 230,
+        "tooltip": "",
+        "helpUrl": ""
+    },
+
     
 ]);
     

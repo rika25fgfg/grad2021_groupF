@@ -256,7 +256,8 @@ Blockly.Blocks.display = {
             "helpUrl": ""
         })
     }
-}
+},
+
 Blockly.JavaScript.display = function (block) {
     var value = Blockly.JavaScript.valueToCode(block, 'value', Blockly.JavaScript.ORDER_NONE) || 0
     return "var e = document.getElementById('dialog');e.textContent = '計算結果は ' + (" + value + ") + ' です！';e.style.display = ''"

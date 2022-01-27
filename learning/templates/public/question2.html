@@ -23,7 +23,7 @@
 
   </xml>
 
-<button id="question1">1</button><h4>&nbsp;&nbsp;&nbsp;「for文のプログラムです。」を10回表示するブロックを作成しなさい。</h4>
+<button id="question2">2</button><h4>&nbsp;&nbsp;&nbsp;「あいうえお」と表示するブロックを作成しなさい</h4>
 
 
   <button id="showCode">JavaScriptを表示する</button>
@@ -55,10 +55,7 @@
   <p><button onclick="runJavaScript(event)">実行</button></p>
   <pre id='jsCode'></pre>
 
-<button id="back" type="button"><a href="{% url 'learning:index' %}">戻る</a></button>
-
-
-<button id="next" type="button"><a href="{% url 'learning:question2' %}">次の問題</a></button>
+<button id="next" type="button"><a href="{% url 'learning:enzan' %}">次の問題</a></button>
 
 
 
@@ -81,12 +78,6 @@
     bottom: 10px;
     left: 10px;
   }
-
-  #back {
-    position: absolute;
-    bottom: 70px;
-    left: 10px;
-  }
   #showCode{
     position: absolute;
     bottom: 25px;
@@ -104,6 +95,17 @@
     margin-left: 20px;
   }
 
+  #question2 {
+    margin-left: 20px;
+  }
+
+  #question3 {
+    margin-left: 20px;
+  }
+
+  #question4 {
+    margin-left: 20px;
+  }
 
   #next{
     border-radius: 100vh;
