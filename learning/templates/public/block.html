@@ -9,7 +9,7 @@
 
 
 <body>
-  <h4>「for文のプログラムです。」を10回表示するブロックを作成してください。</h4>
+  <h4>「あいうえお」を表示するブロックを作成してください。</h4>
 
   
   <!--<?xml version="1.0"?>-->
@@ -27,7 +27,7 @@
       -<block type="controls_repeat_ext">
         -<value name="TIMES">
           -<shadow type="math_number">
-            <field name="NUM">10</field>
+            <field name="NUM">0</field>
           </shadow>
         </value>
       </block>
@@ -182,6 +182,8 @@
   <pre id="pre1"></pre>
   <pre id='jsCode'></pre>
   <button onclick="runJavaScript(event)">実行</button>
+
+  <button id="back" type="button"><a href="{% url 'learning:index' %}">戻る</a></button>
 
   <p id="buttonRow">
     <span>

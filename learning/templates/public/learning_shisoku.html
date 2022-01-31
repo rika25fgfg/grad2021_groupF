@@ -27,6 +27,7 @@
 <button id="run" type="button">実行</button>
 <div id="dialog" style="position:fixed;top:0;left:0;right:0;bottom:0;opacity:0.8;background-color:white;transition-duration:1s;color:black;font-size:20pt;text-align:center;padding-top:10em;z-index:9999999;display:none"></div>
 <pre id="pre1"></pre>
+<button id="back" type="button"><a href="{% url 'learning:index' %}">戻る</a></button>
 {% if user.is_authenticated %}
 <input type="file" id="file">
 <button onclick="restoreBlocksFrom('test.txt')" id="restoreButton">復元</button> &nbsp;&nbsp;
