@@ -164,10 +164,10 @@ ACCOUNT_AUTHENICATION_METHOD = 'email'
 ACCOUNT_USERNAME_REQUIRED = False
 
 #サインアップにメールアドレス確認をはさむように設定
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# ACCOUNT_EMAIL_REQUIRED = True
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 #ログイン/ログアウト後の遷移先を設定
 LOGIN_REDIRECT_URL = '/' #'learning:index'
