@@ -9,20 +9,20 @@
 
 
 <body>
-  <h4>「あいうえお」を表示するブロックを作成してください。</h4>
+  <h7>「あいうえお」を表示するブロックを作成してください。</h7>
 
   
   <!--<?xml version="1.0"?>-->
   <!-- XMLでツールボックスを定義 -->
   <xml style="display: none" id="toolbox" xmlns="https://developers.google.com/blockly/xml">
-    <category name="分岐" colour="220">
+    <!-- <category name="分岐" colour="220">
       <block type="controls_if"></block>
       <block type="controls_ifelse"></block>
       <block type="logic_compare"></block>
       <block type="logic_operation"></block>
       <block type="logic_negate"></block>
       <block type="logic_boolean"></block>
-    </category>
+    </category> -->
     <category colour="#5ba55b" name="ループ">
       -<block type="controls_repeat_ext">
         -<value name="TIMES">
@@ -176,7 +176,7 @@
   </xml>
 
   <!-- ワークスペースのエリア -->
-  <div id="blocklyDiv" style="height: 450px; width: 800px;"></div>
+  <div id="blocklyDiv" style="height: 355px; width: 700px;"></div>
 
   <button id="showCode">JavaScriptを表示する</button>
   <pre id="pre1"></pre>
@@ -308,6 +308,8 @@ LINE共有
 
 <button id="next" type="button"><a href="{% url 'learning:question2' %}">次の問題</a></button>
 
+
+<!-- <link href="{% static 'css/shisoku.css' %}" rel="stylesheet" /> -->
   <script src="{% md5url 'js/google-blockly/blockly_compressed.js' %}"></script>
   <script src="{% md5url 'js/google-blockly/blocks_compressed.js' %}"></script>
   <script src="{% md5url 'js/google-blockly/javascript_compressed.js' %}"></script>
@@ -317,7 +319,7 @@ LINE共有
   <script src="{% md5url 'js/index.js' %}"></script>
 </body>
 
-<style>
+<!-- <style>
 
   h4 {
     float: right;
@@ -325,7 +327,7 @@ LINE共有
 
   }
 
-</style>
+</style> -->
 
 
 </html>

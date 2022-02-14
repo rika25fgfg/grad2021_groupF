@@ -19,6 +19,22 @@ class EnzanView(generic.TemplateView):
     template_name = "public/learning_shisoku.html"
 class Question2View(generic.TemplateView):
     template_name = "public/question2.html"
+class Question3View(generic.TemplateView):
+    template_name = "public/question3.html"
+class Question4View(generic.TemplateView):
+    template_name = "public/question4.html"
+class Question5View(generic.TemplateView):
+    template_name = "public/question5.html"
+class Question6View(generic.TemplateView):
+    template_name = "public/question6.html"
+class Question7View(generic.TemplateView):
+    template_name = "public/question7.html"
+class Question8View(generic.TemplateView):
+    template_name = "public/question8.html"
+class Question9View(generic.TemplateView):
+    template_name = "public/question9.html"
+class Question10View(generic.TemplateView):
+    template_name = "public/question10.html"
 
 from .forms import QuestionForm #, learningCreateForm
 
